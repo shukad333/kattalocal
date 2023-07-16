@@ -102,7 +102,7 @@ class _MyHomePageState extends State<BusinessPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: const Text("Human IT care"),
+        title: const Text("Add Business Details"),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.account_circle, size: 32.0),
