@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:kattalocal/data/offer_data.dart';
+import 'package:kattalocal/new_offer_page.dart';
 
-class OfferPage extends StatefulWidget {
+class BusinessDetailPage extends StatefulWidget {
   var obj;
 
-
-  OfferPage({Key? key, required this.obj}) : super(key: key);
+  BusinessDetailPage({Key? key, required this.obj}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -15,7 +15,7 @@ class OfferPage extends StatefulWidget {
   }
 }
 
-class _OfferPage extends State<OfferPage> {
+class _OfferPage extends State<BusinessDetailPage> {
   var obj;
 
   _OfferPage({Key? key, required this.obj});
@@ -55,6 +55,7 @@ class _OfferPage extends State<OfferPage> {
     FloatingActionButtonLocation.centerTop,
     FloatingActionButtonLocation.endTop,
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,26 +85,25 @@ class _OfferPage extends State<OfferPage> {
           spaceBetweenChildren: 4,
           dialRoot: customDialRoot
               ? (ctx, open, toggleChildren) {
-            return ElevatedButton(
-              onPressed: toggleChildren,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue[900],
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 22, vertical: 18),
-              ),
-              child: const Text(
-                "Custom Dial Root",
-                style: TextStyle(fontSize: 17),
-              ),
-            );
-          }
+                  return ElevatedButton(
+                    onPressed: toggleChildren,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue[900],
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 22, vertical: 18),
+                    ),
+                    child: const Text(
+                      "Custom Dial Root",
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  );
+                }
               : null,
-          buttonSize:
-          buttonSize, // it's the SpeedDial size which defaults to 56 itself
+          buttonSize: buttonSize,
+          // it's the SpeedDial size which defaults to 56 itself
           // iconTheme: IconThemeData(size: 22),
-          label: extend
-              ? const Text("Open")
-              : null, // The label of the main button.
+          label: extend ? const Text("Open") : null,
+          // The label of the main button.
           /// The active label of the main button, Defaults to label if not specified.
           activeLabel: extend ? const Text("Close") : null,
 
@@ -155,54 +155,55 @@ class _OfferPage extends State<OfferPage> {
               onTap: () => debugPrint('SECOND CHILD'),
             ),
             SpeedDialChild(
-              child: !rmicons ? const Icon(Icons.margin) : null,
-              backgroundColor: Colors.indigo,
-              foregroundColor: Colors.white,
-              label: 'New Offer',
-              visible: true,
-              onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text(("Third Child Pressed")))),
-              onLongPress: () => debugPrint('THIRD CHILD LONG PRESS'),
-            ),
+                child: !rmicons ? const Icon(Icons.margin) : null,
+                backgroundColor: Colors.indigo,
+                foregroundColor: Colors.white,
+                label: 'New Offer',
+                visible: true,
+                onTap: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NewOfferPage()))
+                    }),
           ],
-        )
-        );
-        // floatingActionButton: FloatingActionButton(
-        //     child: const Icon(Icons.add),
-        //     onPressed: () {
-        //       showDialog<String>(
-        //         context: context,
-        //         builder: (BuildContext context) => AlertDialog(
-        //           title: const Text('Add Offer'),
-        //           content: Center(
-        //               child: Column(
-        //             children: [
-        //               TextField(
-        //                 controller: nameCont,
-        //                 decoration: const InputDecoration.collapsed(
-        //                     hintText: 'Item Name'),
-        //               ),
-        //               TextField(
-        //                 controller: discount,
-        //                 decoration: const InputDecoration.collapsed(
-        //                     hintText: 'Discount'),
-        //               ),
-        //             ],
-        //           )),
-        //           actions: <Widget>[
-        //             TextButton(
-        //               onPressed: () => Navigator.pop(context, 'Cancel'),
-        //               child: const Text('Cancel'),
-        //             ),
-        //             TextButton(
-        //               onPressed: () =>
-        //                   save(nameCont.text, discount.text, context),
-        //               child: const Text('OK'),
-        //             ),
-        //           ],
-        //         ),
-        //       );
-        //     }));
+        ));
+    // floatingActionButton: FloatingActionButton(
+    //     child: const Icon(Icons.add),
+    //     onPressed: () {
+    //       showDialog<String>(
+    //         context: context,
+    //         builder: (BuildContext context) => AlertDialog(
+    //           title: const Text('Add Offer'),
+    //           content: Center(
+    //               child: Column(
+    //             children: [
+    //               TextField(
+    //                 controller: nameCont,
+    //                 decoration: const InputDecoration.collapsed(
+    //                     hintText: 'Item Name'),
+    //               ),
+    //               TextField(
+    //                 controller: discount,
+    //                 decoration: const InputDecoration.collapsed(
+    //                     hintText: 'Discount'),
+    //               ),
+    //             ],
+    //           )),
+    //           actions: <Widget>[
+    //             TextButton(
+    //               onPressed: () => Navigator.pop(context, 'Cancel'),
+    //               child: const Text('Cancel'),
+    //             ),
+    //             TextButton(
+    //               onPressed: () =>
+    //                   save(nameCont.text, discount.text, context),
+    //               child: const Text('OK'),
+    //             ),
+    //           ],
+    //         ),
+    //       );
+    //     }));
   }
 
   save(n, d, context) {
@@ -228,8 +229,10 @@ class MyCard extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => OfferPage(obj: obj)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BusinessDetailPage(obj: obj)));
           },
           child: Card(
             color: Colors.blue[200],

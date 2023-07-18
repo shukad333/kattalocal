@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kattalocal/business.dart';
+import 'package:kattalocal/business_detail.dart';
 import 'package:kattalocal/offers.dart';
 
 
@@ -54,7 +55,7 @@ class MyCard extends StatelessWidget{
          InkWell(
            onTap: (){
 
-       Navigator.push(context, MaterialPageRoute(builder: (context)=>OfferPage(obj:obj)));
+       Navigator.push(context, MaterialPageRoute(builder: (context)=>BusinessDetailPage(obj:obj)));
            },
            child: Card(
              color: Colors.blue[200],
