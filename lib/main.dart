@@ -6,7 +6,9 @@ import 'package:kattalocal/business_detail.dart';
 import 'package:kattalocal/offers.dart';
 
 
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(home: Dashboard()));
 }
 

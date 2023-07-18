@@ -19,4 +19,19 @@ class Offer {
     offers.add(o);
     print(offers);
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'description': description,
+      'currentPrice': currentPrice,
+      'offerPrice': offerPrice,
+      'startDate':startDate,
+      'endDate':endDate
+    };
+  }
+
+  @override
+  String toString() {
+    return 'Offer{description: $description, currentPrice: $currentPrice, offerPrice: $offerPrice,startDate:$startDate,endDate:$endDate}';
+  }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:kattalocal/data/offer_data.dart';
 import 'package:kattalocal/new_offer_page.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 class BusinessDetailPage extends StatefulWidget {
   var obj;
@@ -62,13 +64,15 @@ class _OfferPage extends State<BusinessDetailPage> {
         appBar: AppBar(
           title: Text(obj['name']),
         ),
-        body: Center(
-          child: ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (context, index) {
-                return MyCard(obj: data[index]);
-              }),
-        ),
+        body: FutureBuilder<List>(
+            future: offers(),
+            builder: (context, snapshot) {
+              return ListView.builder(
+                  itemCount: snapshot.data?.length,
+                  itemBuilder: (context, index) {
+                    return MyCard(obj: snapshot.data![index]);
+                  });
+            }),
         floatingActionButton: SpeedDial(
           // animatedIcon: AnimatedIcons.menu_close,
           // animatedIconTheme: IconThemeData(size: 22.0),
@@ -219,6 +223,43 @@ class _OfferPage extends State<BusinessDetailPage> {
     });
     print(data);
     Navigator.pop(context, 'OK');
+  }
+
+  Future<List<Offer>> offers() async {
+    // Get a reference to the database.
+
+    print("XVXVXVX");
+    final database = openDatabase(
+      // Set the path to the database. Note: Using the `join` function from the
+      // `path` package is best practice to ensure the path is correctly
+      // constructed for each platform.
+      join(await getDatabasesPath(), 'doggie_database.db'),
+      // When the database is first created, create a table to store dogs.
+      // onCreate: (db, version) {
+      //   // Run the CREATE TABLE statement on the database.
+      //   return db.execute(
+      //     'CREATE TABLE dogs(id INTEGER PRIMARY KEY, name TEXT, age INTEGER)',
+      //   );
+      // },
+      // Set the version. This executes the onCreate function and provides a
+      // path to perform database upgrades and downgrades.
+      version: 1,
+    );
+    final db = await database;
+
+    // Query the table for all The Dogs.
+    final List<Map<String, dynamic>> maps = await db.query('offer');
+
+    // Convert the List<Map<String, dynamic> into a List<Dog>.
+    return List.generate(maps.length, (i) {
+      return Offer(
+        maps[i]['description'],
+        maps[i]['currentPrice'],
+        maps[i]['offerPrice'],
+        maps[i]['startDate'],
+        maps[i]['endDate'],
+      );
+    });
   }
 }
 

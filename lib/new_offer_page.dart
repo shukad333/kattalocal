@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kattalocal/data/offer_data.dart';
+import 'package:path/path.dart' as Path;
+import 'package:sqflite/sqflite.dart';
 
 
 class NewOfferPage extends StatefulWidget {
@@ -18,8 +20,58 @@ class _MyHomePageState extends State<NewOfferPage> {
 
   var measure;
 
-  void _submit() {
-    Offer.addOffer(Offer(description,currentPrice,offerPrice,startDate.text,endDate.text));
+
+  Future<void> addToDB() async {
+    final database = openDatabase(
+
+      // Set the path to the database. Note: Using the `join` function from the
+      // `path` package is best practice to ensure the path is correctly
+      // constructed for each platform.
+      Path.join(await getDatabasesPath(), 'doggie_database.db'),
+      // When the database is first created, create a table to store dogs.
+      onCreate: (db, version) {
+        // Run the CREATE TABLE statement on the database.
+        return db.execute(
+          'CREATE TABLE offer(description TEXT, currentPrice TEXT, offerPrice TEXT,startDate TEXT,endDate TEXT)',
+        );
+      },
+      // Set the version. This executes the onCreate function and provides a
+      // path to perform database upgrades and downgrades.
+      version: 1,
+    );
+
+    final db = await database;
+
+
+
+
+    Offer offer = Offer(description,currentPrice,offerPrice,startDate.text,endDate.text);
+
+    await db.insert(
+      'offer',
+      offer.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    print('XXXXX');
+  }
+
+  void _submit() async{
+    await addToDB();
+    // final database = openDatabase(
+    //     join(await getDatabasesPath(),'katta_local.db')
+    // );
+
+
+    // onCreate: (db, version) {
+    //   // Run the CREATE TABLE statement on the database.
+    //   return db.execute(
+    //     'CREATE TABLE offer(description TEXT, currentPrice TEXT, offerPrice TEXT,startDate TEXT,endDate TEXT)',
+    //   );
+    // };
+
+
+
+    // Offer.addOffer(offer);
     // showDialog<void>(
     //   context: context,
     //   barrierDismissible: true, // user can tap anywhere to close the pop up
@@ -99,6 +151,7 @@ class _MyHomePageState extends State<NewOfferPage> {
     //     );
     //   },
     // );
+
     Navigator.of(context).pop();
   }
 
