@@ -1,9 +1,14 @@
 
 class Offer {
-  final String name;
-  final int percent;
+  final String description;
+  final String currentPrice;
+  final String offerPrice;
+  final String startDate;
+  final String endDate;
+  // final String name;
+  // final int percent;
 
-  Offer(this.name,this.percent);
+  Offer(this.description,this.currentPrice,this.offerPrice,this.startDate,this.endDate);
 
   static List<Offer> offers = [];
 

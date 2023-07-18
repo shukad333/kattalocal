@@ -162,9 +162,14 @@ class _OfferPage extends State<BusinessDetailPage> {
                 visible: true,
                 onTap: () => {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => NewOfferPage()))
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NewOfferPage()))
+                          .then((value) {
+                        setState(() {
+                          data = Offer.getOffers();
+                        });
+                      })
                     }),
           ],
         ));
@@ -208,7 +213,7 @@ class _OfferPage extends State<BusinessDetailPage> {
 
   save(n, d, context) {
     print('XXXX');
-    Offer.addOffer(Offer(n, int.parse(d)));
+    // Offer.addOffer(Offer(n, int.parse(d)));
     setState(() {
       data = Offer.getOffers();
     });
@@ -242,10 +247,46 @@ class MyCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: ListTile(
-              leading: CircleAvatar(child: Icon(Icons.add)),
-              title: Text(obj.name),
-              subtitle: Text(obj.percent.toString() + " %"),
-              trailing: Icon(Icons.hotel),
+              leading: const CircleAvatar(
+                  child: Icon(Icons.emoji_food_beverage_rounded)),
+              title: Text(obj.description),
+              subtitle: Column(
+                children: [
+                  const Divider(
+                    height: 10,
+                    thickness: 0.1,
+                  ),
+                  Row(
+                    children: [
+                      Text(obj.currentPrice,
+                          style: const TextStyle(
+                              decoration: TextDecoration.lineThrough,
+                              color: Colors.red)),
+                      const SizedBox(width: 10),
+                      Text(
+                        obj.offerPrice,
+                        style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green),
+                      )
+                    ],
+                  ),
+                  const Divider(
+                    height: 10,
+                    thickness: 0.1,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "Ends on ${obj.endDate}",
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      )
+                    ],
+                  )
+                ],
+              ),
+              trailing: Icon(Icons.arrow_circle_right),
             ),
           ),
         ),
@@ -253,7 +294,7 @@ class MyCard extends StatelessWidget {
           //*iki eleman arasini bolen cizgi
           color: Colors.red,
           thickness: 1,
-          height: 10,
+          height: 20,
           indent: 20,
           //*soldan bosluk
           endIndent: 20, //*sagdan bosluk

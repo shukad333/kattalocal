@@ -25,6 +25,12 @@ class _OfferPage extends State<OfferPage> {
 
   var data = Offer.getOffers();
 
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    data = Offer.getOffers();
+  }
+
   // @override
   // void setState(VoidCallback fn) {
   //   print('Set state CXXXX');
@@ -207,7 +213,7 @@ class _OfferPage extends State<OfferPage> {
 
   save(n, d, context) {
     print('XXXX');
-    Offer.addOffer(Offer(n, int.parse(d)));
+    // Offer.addOffer(Offer(n, int.parse(d)));
     setState(() {
       data = Offer.getOffers();
     });
@@ -240,8 +246,8 @@ class MyCard extends StatelessWidget {
             ),
             child: ListTile(
               leading: CircleAvatar(child: Icon(Icons.add)),
-              title: Text(obj.name),
-              subtitle: Text(obj.percent.toString() + " %"),
+              title: Text(obj.description),
+              subtitle: Text(obj.currentPrice),
               trailing: Icon(Icons.hotel),
             ),
           ),
