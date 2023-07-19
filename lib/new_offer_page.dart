@@ -199,6 +199,37 @@ class _MyHomePageState extends State<NewOfferPage> {
                 children: <Widget>[
                   TextFormField(
                     decoration: const InputDecoration(
+                        labelText: 'Offer Title',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                          BorderSide(color: Colors.grey, width: 0.0),
+                        ),
+                        border: OutlineInputBorder()),
+                    onFieldSubmitted: (value) {
+                      setState(() {
+                        description = value.toUpperCase();
+                        // firstNameList.add(firstName);
+                      });
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        description = value.toUpperCase();
+                      });
+                    },
+                    // validator: (value) {
+                    //   if (value == null || value.isEmpty || value.length < 3) {
+                    //     return 'Business Name must contain at least 3 characters';
+                    //   } else if (value.contains(RegExp(r'^[0-9_\-=@,\.;]+$'))) {
+                    //     return 'Business Name cannot contain special characters';
+                    //   }
+                    // },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(
                         labelText: 'Description',
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
