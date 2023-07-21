@@ -12,6 +12,19 @@ void main() {
   runApp(MaterialApp(home: Dashboard()));
 }
 
+class LocalApp extends StatelessWidget {
+  const LocalApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Katta Local',
+    );
+  }
+}
+
+
 
 
 class Business {
