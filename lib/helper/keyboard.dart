@@ -1,15 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:kattalocal/screens/splash/components/body.dart';
-import 'package:kattalocal/size_config.dart';
+import 'package:flutter/cupertino.dart';
 
-class SplashScreen extends StatelessWidget {
-  static String routeName = "/splash";
-  @override
-  Widget build(BuildContext context) {
-    // You have to call it on your starting screen
-    SizeConfig().init(context);
-    return Scaffold(
-      body: Body(),
-    );
+class KeyboardUtil {
+  static void hideKeyboard(BuildContext context) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
   }
 }
