@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:kattalocal/business.dart';
 import 'package:kattalocal/business_detail.dart';
 import 'package:kattalocal/offers.dart';
+import 'package:kattalocal/routes.dart';
+import 'package:kattalocal/screens/splash/splash_screen.dart';
+import 'package:kattalocal/theme.dart';
 
 
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MaterialApp(home: Dashboard()));
+  // runApp(MaterialApp(home: Dashboard()));
+  runApp(const LocalApp());
 }
 
 class LocalApp extends StatelessWidget {
@@ -17,9 +21,12 @@ class LocalApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Katta Local',
+      theme: theme(),
+      initialRoute: SplashScreen.routeName,
+      routes: routes,
     );
   }
 }
