@@ -43,7 +43,7 @@ class _SignFormState extends State<SignForm> {
         children: [
           buildEmailFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          buildPasswordFormField(),
+          // buildPasswordFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           Row(
             children: [
@@ -72,7 +72,7 @@ class _SignFormState extends State<SignForm> {
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
-            text: "Continue",
+            text: "Send OTP",
             press: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
@@ -109,7 +109,7 @@ class _SignFormState extends State<SignForm> {
         }
         return null;
       },
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         labelText: "Password",
         hintText: "Enter your password",
         // If  you are using latest version of flutter then lable text and hint text shown like this
@@ -122,7 +122,7 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.number,
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -136,15 +136,16 @@ class _SignFormState extends State<SignForm> {
         if (value!.isEmpty) {
           addError(error: kEmailNullError);
           return "";
-        } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
-          return "";
         }
+        // } else if (!emailValidatorRegExp.hasMatch(value)) {
+        //   addError(error: kInvalidEmailError);
+        //   return "";
+        // }
         return null;
       },
-      decoration: InputDecoration(
-        labelText: "Email",
-        hintText: "Enter your email",
+      decoration: const InputDecoration(
+        labelText: "Phone Number",
+        hintText: "Enter your Phone",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
