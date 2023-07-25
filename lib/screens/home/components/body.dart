@@ -8,17 +8,19 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(height: getProportionateScreenHeight(20)),
-          const HomeHeader(),
-          SizedBox(height: getProportionateScreenWidth(10)),
-          // DiscountBanner(),
-          // Categories(),
-        ],
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: getProportionateScreenHeight(20)),
+            const HomeHeader(),
+            SizedBox(height: getProportionateScreenWidth(10)),
+
+            // DiscountBanner(),
+            // Categories(),
+          ],
+        ),
       ),
-    )
     );
   }
 }
