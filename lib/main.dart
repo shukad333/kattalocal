@@ -11,7 +11,7 @@ import 'package:kattalocal/theme.dart';
 
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
   // runApp(MaterialApp(home: Dashboard()));
   runApp(const LocalApp());
 }
