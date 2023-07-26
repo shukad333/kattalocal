@@ -22,7 +22,7 @@ class BusinessDescription extends StatelessWidget {
       children: [
         Padding(
           padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: Text(
             business.name,
             style: Theme.of(context).textTheme.headline6,
@@ -67,7 +67,7 @@ class BusinessDescription extends StatelessWidget {
           child: GestureDetector(
             onTap: () {},
             child: Row(
-              children: [
+              children: const [
                 Text(
                   "See More Detail",
                   style: TextStyle(
