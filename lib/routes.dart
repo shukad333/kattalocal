@@ -1,4 +1,6 @@
 import 'package:flutter/widgets.dart';
+import 'package:kattalocal/business_detail.dart';
+import 'package:kattalocal/details/business_details_screen.dart';
 import 'package:kattalocal/screens/complete_profile/complete_profile_screen.dart';
 import 'package:kattalocal/screens/home/home_screen.dart';
 import 'package:kattalocal/screens/login_success/login_success_screen.dart';
@@ -18,5 +20,6 @@ final Map<String, WidgetBuilder> routes = {
   OtpScreen.routeName: (context) => OtpScreen(),
   LoginSuccessScreen.routeName: (context) => LoginSuccessScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
+  BusinessDetailsScreen.routeName: (context) => BusinessDetailsScreen(),
 
 };
