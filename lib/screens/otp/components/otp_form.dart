@@ -54,7 +54,7 @@ class _OtpFormState extends State<OtpForm> {
                 child: TextFormField(
                   autofocus: true,
                   obscureText: true,
-                  style: TextStyle(fontSize: 24),
+                  style: const TextStyle(fontSize: 24),
                   keyboardType: TextInputType.number,
                   textAlign: TextAlign.center,
                   decoration: otpInputDecoration,
