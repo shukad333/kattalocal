@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:kattalocal/components/custom_surfix_icon.dart';
 import 'package:kattalocal/components/default_button.dart';
 import 'package:kattalocal/components/form_error.dart';
@@ -87,37 +88,58 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon:
-        CustomSurffixIcon(svgIcon: "assets/icons/Location point.svg"),
+            CustomSurffixIcon(svgIcon: "assets/icons/Location point.svg"),
       ),
     );
   }
 
-  TextFormField buildPhoneNumberFormField() {
-    return TextFormField(
-      keyboardType: TextInputType.phone,
-      onSaved: (newValue) => phoneNumber = newValue,
-      onChanged: (value) {
-        if (value.isNotEmpty) {
-          removeError(error: kPhoneNumberNullError);
-        }
-        return null;
-      },
-      validator: (value) {
-        if (value!.isEmpty) {
-          addError(error: kPhoneNumberNullError);
-          return "";
-        }
-        return null;
-      },
+  FocusNode focusNode = FocusNode();
+
+  IntlPhoneField buildPhoneNumberFormField() {
+    return IntlPhoneField(
+      focusNode: focusNode,
+      initialCountryCode: 'IN',
       decoration: const InputDecoration(
-        labelText: "Your Mobile Number",
-        hintText: "Enter your phone number",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
+        labelText: 'Phone Number',
+        border: OutlineInputBorder(
+          borderSide: BorderSide(),
+        ),
       ),
+      languageCode: "en",
+      onChanged: (phone) {
+        print(phone.completeNumber);
+      },
+      onCountryChanged: (country) {
+        print('Country changed to: ' + country.name);
+        print('Country changed to: ' + country.code);
+      },
+
     );
+    // return TextFormField(
+    //   keyboardType: TextInputType.phone,
+    //   onSaved: (newValue) => phoneNumber = newValue,
+    //   onChanged: (value) {
+    //     if (value.isNotEmpty) {
+    //       removeError(error: kPhoneNumberNullError);
+    //     }
+    //     return null;
+    //   },
+    //   validator: (value) {
+    //     if (value!.isEmpty) {
+    //       addError(error: kPhoneNumberNullError);
+    //       return "";
+    //     }
+    //     return null;
+    //   },
+    //   decoration: const InputDecoration(
+    //     labelText: "Your Mobile Number",
+    //     hintText: "Enter your phone number",
+    //     // If  you are using latest version of flutter then lable text and hint text shown like this
+    //     // if you r using flutter less then 1.20.* then maybe this is not working properly
+    //     floatingLabelBehavior: FloatingLabelBehavior.always,
+    //     suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
+    //   ),
+    // );
   }
 
   TextFormField buildOwnerNameFormField() {
@@ -147,7 +169,6 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       ),
     );
   }
-
 
   TextFormField buildBusinessLocationFormField() {
     return TextFormField(
