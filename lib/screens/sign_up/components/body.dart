@@ -18,11 +18,11 @@ class Body extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04), // 4%
-                // Text("Register Account", style: headingStyle),
-                const Text(
-                  "Ready to Join? Register your \nbusiness now",
-                  textAlign: TextAlign.center,
-                ),
+                Text("Ready to Join? Register your \nbusiness now", style: headingStyle),
+                // const Text(
+                //   "Ready to Join? Register your \nbusiness now",
+                //   textAlign: TextAlign.center,
+                // ),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
                 SignUpForm(),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
