@@ -40,17 +40,19 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       key: _formKey,
       child: Column(
         children: [
-          buildFirstNameFormField(),
+          buildBusinessNameFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          buildLastNameFormField(),
+          buildBusinessLocationFormField(),
+          SizedBox(height: getProportionateScreenHeight(30)),
+          buildOwnerNameFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildPhoneNumberFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          buildAddressFormField(),
+          buildEmailFormField(),
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(40)),
           DefaultButton(
-            text: "continue",
+            text: "Register",
             press: () {
               if (_formKey.currentState!.validate()) {
                 Navigator.pushNamed(context, OtpScreen.routeName);
@@ -80,7 +82,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       },
       decoration: const InputDecoration(
         labelText: "Address",
-        hintText: "Enter your phone address",
+        hintText: "Enter your address",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -107,8 +109,8 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         }
         return null;
       },
-      decoration: InputDecoration(
-        labelText: "Phone Number",
+      decoration: const InputDecoration(
+        labelText: "Your Mobile Number",
         hintText: "Enter your phone number",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
@@ -118,12 +120,12 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
     );
   }
 
-  TextFormField buildLastNameFormField() {
+  TextFormField buildOwnerNameFormField() {
     return TextFormField(
       onSaved: (newValue) => lastName = newValue,
-      decoration: InputDecoration(
-        labelText: "Last Name",
-        hintText: "Enter your last name",
+      decoration: const InputDecoration(
+        labelText: "Your Name",
+        hintText: "Enter your full name",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -132,7 +134,36 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
     );
   }
 
-  TextFormField buildFirstNameFormField() {
+  TextFormField buildEmailFormField() {
+    return TextFormField(
+      onSaved: (newValue) => lastName = newValue,
+      decoration: const InputDecoration(
+        labelText: "Your Email ID:",
+        hintText: "Enter your email id",
+        // If  you are using latest version of flutter then lable text and hint text shown like this
+        // if you r using flutter less then 1.20.* then maybe this is not working properly
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
+      ),
+    );
+  }
+
+
+  TextFormField buildBusinessLocationFormField() {
+    return TextFormField(
+      onSaved: (newValue) => lastName = newValue,
+      decoration: const InputDecoration(
+        labelText: "Your Business Location",
+        hintText: "Enter your business location",
+        // If  you are using latest version of flutter then lable text and hint text shown like this
+        // if you r using flutter less then 1.20.* then maybe this is not working properly
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
+      ),
+    );
+  }
+
+  TextFormField buildBusinessNameFormField() {
     return TextFormField(
       onSaved: (newValue) => firstName = newValue,
       onChanged: (value) {
@@ -148,9 +179,9 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         }
         return null;
       },
-      decoration: InputDecoration(
-        labelText: "First Name",
-        hintText: "Enter your first name",
+      decoration: const InputDecoration(
+        labelText: "Your Business Name",
+        hintText: "Enter your business name",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
