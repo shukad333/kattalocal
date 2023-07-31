@@ -19,6 +19,7 @@ class _SignFormState extends State<SignForm> {
   String? email;
   String? password;
   bool? remember = false;
+  String? phoneNumber;
   final List<String?> errors = [];
 
   void addError({String? error}) {
@@ -45,34 +46,34 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(30)),
           // buildPasswordFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          Row(
-            children: [
-              Checkbox(
-                value: remember,
-                activeColor: kPrimaryColor,
-                onChanged: (value) {
-                  setState(() {
-                    remember = value;
-                  });
-                },
-              ),
-              Text("Remember me"),
-              Spacer(),
-              GestureDetector(
-                onTap: () => {},
-                // Navigator.pushNamed(
-                //     context, ForgotPasswordScreen.routeName),
-                child: Text(
-                  "Forgot Password",
-                  style: TextStyle(decoration: TextDecoration.underline),
-                ),
-              )
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     Checkbox(
+          //       value: remember,
+          //       activeColor: kPrimaryColor,
+          //       onChanged: (value) {
+          //         setState(() {
+          //           remember = value;
+          //         });
+          //       },
+          //     ),
+          //     Text("Remember me"),
+          //     Spacer(),
+          //     GestureDetector(
+          //       onTap: () => {},
+          //       // Navigator.pushNamed(
+          //       //     context, ForgotPasswordScreen.routeName),
+          //       child: Text(
+          //         "Forgot Password",
+          //         style: TextStyle(decoration: TextDecoration.underline),
+          //       ),
+          //     )
+          //   ],
+          // ),
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
-            text: "Send OTP",
+            text: "Sign In",
             press: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
@@ -123,7 +124,7 @@ class _SignFormState extends State<SignForm> {
   TextFormField buildEmailFormField() {
     return TextFormField(
       keyboardType: TextInputType.number,
-      onSaved: (newValue) => email = newValue,
+      onSaved: (newValue) => phoneNumber = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
@@ -144,7 +145,7 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       decoration: const InputDecoration(
-        labelText: "Phone Number",
+        labelText: "Your Mobile Number",
         hintText: "Enter your Phone",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly

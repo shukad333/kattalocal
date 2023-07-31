@@ -78,7 +78,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         }
         return null;
       },
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         labelText: "Address",
         hintText: "Enter your phone address",
         // If  you are using latest version of flutter then lable text and hint text shown like this

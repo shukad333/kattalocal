@@ -18,9 +18,9 @@ class Body extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04), // 4%
-                Text("Register Account", style: headingStyle),
-                Text(
-                  "Complete your details or continue \nwith social media",
+                // Text("Register Account", style: headingStyle),
+                const Text(
+                  "Ready to Join? Register your \nbusiness now",
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
