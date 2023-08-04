@@ -5,9 +5,11 @@ import 'package:kattalocal/screens/complete_profile/complete_profile_screen.dart
 import 'package:kattalocal/screens/home/home_screen.dart';
 import 'package:kattalocal/screens/login_success/login_success_screen.dart';
 import 'package:kattalocal/screens/otp/otp_screen.dart';
+import 'package:kattalocal/screens/publish_offer/publish_offer_screen.dart';
 import 'package:kattalocal/screens/sign_in/sign_in_screen.dart';
 import 'package:kattalocal/screens/sign_up/sign_up_screen.dart';
 import 'package:kattalocal/screens/splash/splash_screen.dart';
+import 'package:path/path.dart';
 
 
 // We use name route
@@ -21,5 +23,6 @@ final Map<String, WidgetBuilder> routes = {
   LoginSuccessScreen.routeName: (context) => LoginSuccessScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
   BusinessDetailsScreen.routeName: (context) => BusinessDetailsScreen(),
+  PublishOfferScreen.routeName: (context) => PublishOfferScreen(),
 
 };
