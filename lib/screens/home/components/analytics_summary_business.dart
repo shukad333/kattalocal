@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:kattalocal/constants.dart';
 
@@ -62,4 +64,11 @@ class _AnalyticsSummaryForBusinessState
       ],
     );
   }
+}
+
+class AnalyticsSummaryView {
+  // final AnalyticsSummaryView analyticsSummaryView;
+  // AnalyticsSummaryView({required this.analyticsSummaryView});
+  final Long businessId;
+  AnalyticsSummaryView({required this.businessId});
 }
