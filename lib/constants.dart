@@ -20,6 +20,13 @@ final headingStyle = TextStyle(
   height: 1.5,
 );
 
+final businessAddressDashboard = TextStyle(
+  fontSize: getProportionateScreenWidth(15),
+  fontWeight: FontWeight.bold,
+  color: Colors.blueAccent,
+  height: 1,
+);
+
 final analyticsSummaryValue = TextStyle(
   fontSize: getProportionateScreenWidth(28),
   fontWeight: FontWeight.bold,

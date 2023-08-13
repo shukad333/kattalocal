@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:kattalocal/data/business_rest_util.dart';
 import 'package:kattalocal/details/components/offer_card.dart';
 import 'package:kattalocal/models/Business.dart';
 import 'package:kattalocal/models/offer.dart';
