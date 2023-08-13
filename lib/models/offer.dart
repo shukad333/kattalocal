@@ -6,9 +6,8 @@ class Offer {
   final String description;
   final String startDate;
   final String endDate;
-  final bool isActive;
 
-  Offer({required this.id,required this.title,required this.description,required this.startDate,required this.endDate,required this.isActive});
+  Offer({required this.id,required this.title,required this.description,required this.startDate,required this.endDate});
 
 
   factory Offer.fromJson(Map<String, dynamic> json) {
@@ -18,7 +17,6 @@ class Offer {
       description: json['description'],
       startDate: json['startDate'],
       endDate: json['endDate'],
-      isActive: json['isActive'],
     );
   }
 }

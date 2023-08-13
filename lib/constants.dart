@@ -20,6 +20,14 @@ final headingStyle = TextStyle(
   height: 1.5,
 );
 
+final headingStyleMedium = TextStyle(
+  fontSize: getProportionateScreenWidth(20),
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+  height: 1.5,
+);
+
+
 final businessAddressDashboard = TextStyle(
   fontSize: getProportionateScreenWidth(15),
   fontWeight: FontWeight.bold,
