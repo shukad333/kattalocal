@@ -20,11 +20,39 @@ final headingStyle = TextStyle(
   height: 1.5,
 );
 
+final headingStyleSmall = TextStyle(
+  fontSize: getProportionateScreenWidth(10),
+  fontWeight: FontWeight.normal,
+  color: Colors.black,
+  height: 1.5,
+);
+
+final headingStyleSmallMedium = TextStyle(
+  fontSize: getProportionateScreenWidth(15),
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+  height: 1.5,
+);
+
+final headingStyleSmallRed = TextStyle(
+  fontSize: getProportionateScreenWidth(10),
+  fontWeight: FontWeight.normal,
+  color: Colors.red,
+  height: 1.5,
+);
+
 final headingStyleMedium = TextStyle(
   fontSize: getProportionateScreenWidth(20),
   fontWeight: FontWeight.bold,
   color: Colors.black,
   height: 1.5,
+);
+
+final headingStyleMediumGreen = TextStyle(
+  fontSize: getProportionateScreenWidth(20),
+  fontWeight: FontWeight.bold,
+  color: Colors.green,
+  height: 1.2,
 );
 
 

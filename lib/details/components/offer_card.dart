@@ -10,17 +10,56 @@ class OfferCard extends StatelessWidget {
 
   const OfferCard({Key? key, required this.offer}) : super(key: key);
 
+  Widget customOfferCard(Offer offer) {
+    return Card(
+
+      child: SizedBox(
+        width: 350,
+        height: 300,
+        child: ListTile(
+          isThreeLine: true,
+          leading: Image.asset("assets/images/shop.jpeg"),
+          title: Text(offer.title,style: headingStyleMedium,),
+          subtitle: Row(
+            children: [
+              Column(
+                children: [
+                  const SizedBox(height: 20,),
+                  Text("Current Price: ${offer.currentPrice}",style: headingStyleSmallMedium,),
+                  const SizedBox(height: 20,),
+                  Text("Offer Price: ${offer.offerPrice}",style: headingStyleSmallMedium,),
+                ],
+              ),
+            ],
+          ),
+          trailing: Text("23% ",style: headingStyleMediumGreen,),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: (){},
+      child: customOfferCard(offer),
+    );
+  }
+
+  Widget _build(BuildContext context) {
+    return GestureDetector(
       onTap: () {},
       child: Container(
-        margin: const EdgeInsets.all(15.0),
+
+        height: 500,
+        width: 500,
+        margin: const EdgeInsets.all(1.0),
         padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
             border: Border.all(color: Colors.red),
             borderRadius: const BorderRadius.all(Radius.circular(5.0))),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(children: [
               Column(
@@ -55,12 +94,50 @@ class OfferCard extends StatelessWidget {
               )
             ]),
             Row(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Column(
                   children: [
                     Text(
-                      offer.startDate,
-                      style: headingStyleMedium,
+                      "End Date : ${offer.endDate}",
+                      style: headingStyleSmall,
+                    )
+                  ],
+                ),
+                SizedBox(width: 10,),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "Actual Price : 90",
+                          style: headingStyleSmallMedium,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Offer Price : 80",
+                          style: headingStyleSmallMedium,
+                        ),
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
+            SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      "No of Views : 24",
+                      style: headingStyleSmallRed,
                     )
                   ],
                 )
@@ -73,7 +150,7 @@ class OfferCard extends StatelessWidget {
   }
 
   @override
-  Widget _build(BuildContext context) {
+  Widget __build(BuildContext context) {
     return GestureDetector(
       onTap: () {},
       child: Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kattalocal/constants.dart';
 import 'package:kattalocal/data/business_rest_util.dart';
 import 'package:kattalocal/models/Business.dart';
 import 'package:kattalocal/screens/home/components/analytics_summary_business.dart';
@@ -6,6 +7,7 @@ import 'package:kattalocal/screens/home/components/business_listing.dart';
 import 'package:kattalocal/screens/home/components/categories.dart';
 import 'package:kattalocal/screens/home/components/home_header.dart';
 import 'package:kattalocal/screens/home/components/offer_listing.dart';
+import 'package:kattalocal/screens/home/components/offer_listing_header.dart';
 import 'package:kattalocal/size_config.dart';
 import 'package:kattalocal/data/business_rest_util.dart';
 
@@ -38,6 +40,8 @@ class _BodyState extends State<Body> {
             HomeHeader(business: business),
             SizedBox(height: getProportionateScreenHeight(20)),
             const AnalyticsSummaryForBusiness(),
+            SizedBox(height: getProportionateScreenWidth(20)),
+            OfferListingHeader(),
             SizedBox(height: getProportionateScreenWidth(10)),
             OfferListing(business: business,)
             // const BusinessListing()
@@ -47,5 +51,9 @@ class _BodyState extends State<Body> {
         ),
       ),
     );
+  }
+  
+  Widget offerListingTitle() {
+    return Text("Active Offers Published",style: headingStyleMedium,);
   }
 }

@@ -6,8 +6,10 @@ class Offer {
   final String description;
   final String startDate;
   final String endDate;
+  final String currentPrice;
+  final String offerPrice;
 
-  Offer({required this.id,required this.title,required this.description,required this.startDate,required this.endDate});
+  Offer({required this.id,required this.title,required this.description,required this.startDate,required this.endDate,required this.offerPrice,required this.currentPrice});
 
 
   factory Offer.fromJson(Map<String, dynamic> json) {
@@ -17,6 +19,8 @@ class Offer {
       description: json['description'],
       startDate: json['startDate'],
       endDate: json['endDate'],
+      offerPrice: json['offerPrice'],
+      currentPrice: json['currentPrice']
     );
   }
 }
