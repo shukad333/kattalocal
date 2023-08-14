@@ -35,7 +35,7 @@ class _OfferListing extends State<OfferListing> {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 20.0),
-        height: 200.0,
+        height: 220.0,
         child: FutureBuilder<List<Offer>>(
             future: _getOffersData(business.id),
             builder: (context, snapshot) {

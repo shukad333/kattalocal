@@ -30,7 +30,16 @@ final headingStyleSmall = TextStyle(
 final headingStyleSmallMedium = TextStyle(
   fontSize: getProportionateScreenWidth(15),
   fontWeight: FontWeight.bold,
+  fontStyle: FontStyle.italic,
   color: Colors.black,
+  height: 1.5,
+);
+
+final headingStyleSmallMediumItalicRed = TextStyle(
+  fontSize: getProportionateScreenWidth(15),
+  fontWeight: FontWeight.bold,
+  fontStyle: FontStyle.italic,
+  color: Colors.redAccent,
   height: 1.5,
 );
 
@@ -55,6 +64,12 @@ final headingStyleMediumGreen = TextStyle(
   height: 1.2,
 );
 
+final headingStyleSmallGreen = TextStyle(
+  fontSize: getProportionateScreenWidth(15),
+  fontWeight: FontWeight.bold,
+  color: Colors.green,
+  height: 1.2,
+);
 
 final businessAddressDashboard = TextStyle(
   fontSize: getProportionateScreenWidth(15),

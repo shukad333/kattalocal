@@ -12,28 +12,97 @@ class OfferCard extends StatelessWidget {
 
   Widget customOfferCard(Offer offer) {
     return Card(
-
-      child: SizedBox(
-        width: 350,
-        height: 300,
-        child: ListTile(
-          isThreeLine: true,
-          leading: Image.asset("assets/images/shop.jpeg"),
-          title: Text(offer.title,style: headingStyleMedium,),
-          subtitle: Row(
-            children: [
-              Column(
+      shape: RoundedRectangleBorder(
+          //<-- SEE HERE
+          side: const BorderSide(
+            color: Colors.redAccent,
+          ),
+          borderRadius: BorderRadius.circular(20.0)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 300,
+            height: 110,
+            child: ListTile(
+              isThreeLine: true,
+              leading: Column(
                 children: [
-                  const SizedBox(height: 20,),
-                  Text("Current Price: ${offer.currentPrice}",style: headingStyleSmallMedium,),
-                  const SizedBox(height: 20,),
-                  Text("Offer Price: ${offer.offerPrice}",style: headingStyleSmallMedium,),
+                  SizedBox(
+                      height: getProportionateScreenHeight(41),
+                      width: 100.0, // fixed width and height
+                      child: CircleAvatar(
+                        child: Image.asset("assets/images/shop.jpeg"),
+                      )),
+                  Text(
+                    "30% Off",
+                    style: headingStyleSmallGreen,
+                  )
                 ],
               ),
-            ],
+              title: Text(
+                offer.title,
+                style: headingStyleMedium,
+              ),
+              subtitle: Row(
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Current Price: ${offer.currentPrice}",
+                        style: headingStyleSmallMedium,
+                      ),
+                      const SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        "Offer Price: ${offer.offerPrice}",
+                        style: headingStyleSmallMedium,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              // trailing: Text("23% ",style: headingStyleMediumGreen,),
+            ),
           ),
-          trailing: Text("23% ",style: headingStyleMediumGreen,),
-        ),
+          SizedBox(
+            width: 350,
+            height: 50,
+            child: ListTile(
+              leading: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'End Date: ${offer.endDate}',
+                    style: headingStyleSmallMedium,
+                  ),
+                  Text(
+                    'No Of Views: 24',
+                    style: headingStyleSmallMediumItalicRed,
+                  ),
+                ],
+              ),
+              trailing: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    " Modify  ",
+                    style: TextStyle(
+                        backgroundColor: Colors.orangeAccent, fontSize: 15),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -41,171 +110,8 @@ class OfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){},
+      onTap: () {},
       child: customOfferCard(offer),
-    );
-  }
-
-  Widget _build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-
-        height: 500,
-        width: 500,
-        margin: const EdgeInsets.all(1.0),
-        padding: const EdgeInsets.all(3.0),
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.red),
-            borderRadius: const BorderRadius.all(Radius.circular(5.0))),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(children: [
-              Column(
-                children: [
-                  SizedBox(
-                    width: 88,
-                    child: AspectRatio(
-                      aspectRatio: 0.88,
-                      child: Container(
-                        padding:
-                            EdgeInsets.all(getProportionateScreenWidth(10)),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF5F6F9),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Image.asset("assets/images/shop.jpeg"),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Column(
-                children: [
-                  Text(
-                    offer.description,
-                    style: headingStyleMedium,
-                  )
-                ],
-              )
-            ]),
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      "End Date : ${offer.endDate}",
-                      style: headingStyleSmall,
-                    )
-                  ],
-                ),
-                SizedBox(width: 10,),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Actual Price : 90",
-                          style: headingStyleSmallMedium,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Offer Price : 80",
-                          style: headingStyleSmallMedium,
-                        ),
-                      ],
-                    )
-                  ],
-                )
-              ],
-            ),
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      "No of Views : 24",
-                      style: headingStyleSmallRed,
-                    )
-                  ],
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget __build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        margin: const EdgeInsets.all(15.0),
-        padding: const EdgeInsets.all(3.0),
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.red),
-            borderRadius: const BorderRadius.all(Radius.circular(5.0))),
-        child: Row(
-          children: [
-            Column(
-              children: [
-                SizedBox(
-                  width: 88,
-                  child: AspectRatio(
-                    aspectRatio: 0.88,
-                    child: Container(
-                      padding: EdgeInsets.all(getProportionateScreenWidth(10)),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF5F6F9),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Image.asset("assets/images/shop.jpeg"),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      offer.title,
-                      style: const TextStyle(color: Colors.black, fontSize: 16),
-                      maxLines: 2,
-                    ),
-                    const SizedBox(height: 10),
-                    Text.rich(
-                      TextSpan(
-                        text: "${offer.description}",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w600, color: kPrimaryColor),
-                        children: [
-                          TextSpan(
-                              text: "",
-                              style: Theme.of(context).textTheme.bodyText1),
-                        ],
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
