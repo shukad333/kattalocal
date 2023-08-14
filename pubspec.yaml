@@ -41,6 +41,10 @@ dependencies:
   flutter_svg: ^2.0.5
   http: ^0.13.6
   intl_phone_field: ^3.2.0
+  intl: ^0.18.1
+  loader_overlay: ^2.3.0
+  overlay_loading_progress: ^1.0.1
+
 
 dev_dependencies:
   flutter_test:

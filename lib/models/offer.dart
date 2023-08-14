@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Offer {
-  final int id;
+  late int id;
   final String title;
   final String description;
   final String startDate;
@@ -9,12 +9,13 @@ class Offer {
   final String currentPrice;
   final String offerPrice;
 
-  Offer({required this.id,required this.title,required this.description,required this.startDate,required this.endDate,required this.offerPrice,required this.currentPrice});
+  Offer({required this.title,required this.description,required this.startDate,required this.endDate,required this.offerPrice,required this.currentPrice, required id});
 
+  // Offer.withId({required this.id,required this.title,required this.description,required this.startDate,required this.endDate,required this.offerPrice,required this.currentPrice});
 
   factory Offer.fromJson(Map<String, dynamic> json) {
     return Offer(
-      id: json['id'],
+      id:json['id'],
       title: json['title'],
       description: json['description'],
       startDate: json['startDate'],
@@ -22,5 +23,19 @@ class Offer {
       offerPrice: json['offerPrice'],
       currentPrice: json['currentPrice']
     );
+
+
+
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'startDate': startDate,
+      'endDate': endDate,
+      'offerPrice': offerPrice,
+      'currentPrice': currentPrice
+    };
   }
 }

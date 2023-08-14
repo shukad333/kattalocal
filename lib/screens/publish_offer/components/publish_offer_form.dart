@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:kattalocal/components/custom_surfix_icon.dart';
 import 'package:kattalocal/components/default_button.dart';
 import 'package:kattalocal/components/form_error.dart';
+import 'package:kattalocal/data/offer_rest_util.dart';
+import 'package:kattalocal/models/offer.dart';
+import 'package:kattalocal/screens/home/home_screen.dart';
 import 'package:kattalocal/screens/otp/otp_screen.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -14,12 +20,15 @@ class PublishOfferForm extends StatefulWidget {
 }
 
 class _PublishOfferFormState extends State<PublishOfferForm> {
+  bool _isLoaderVisible = false;
   final _formKey = GlobalKey<FormState>();
   final List<String?> errors = [];
-  String? firstName;
-  String? lastName;
-  String? phoneNumber;
-  String? address;
+  late String title;
+  late String description;
+  late String currentPrice;
+  late String offerPrice;
+  late String startDate;
+  late String endDate;
 
   void addError({String? error}) {
     if (!errors.contains(error))
@@ -52,9 +61,28 @@ class _PublishOfferFormState extends State<PublishOfferForm> {
           SizedBox(height: getProportionateScreenHeight(40)),
           DefaultButton(
             text: "Publish",
-            press: () {
+            press: () async {
               if (_formKey.currentState!.validate()) {
-                Navigator.pushNamed(context, OtpScreen.routeName);
+                _formKey.currentState?.save();
+                setState(() {
+                  OverlayLoadingProgress.start(context);
+                });
+                print("XXXXCCCCC");
+                print(title);
+                Offer offer = Offer(
+                    id: null,
+                    title: title,
+                    description: description,
+                    startDate: startDate,
+                    endDate: endDate,
+                    currentPrice: currentPrice,
+                    offerPrice: offerPrice);
+                print("XXXX Saving");
+                print(offer);
+                OfferRestUtil offerutil = OfferRestUtil();
+                await offerutil.saveOffer('1', offer);
+                OverlayLoadingProgress.stop();
+                Navigator.pushNamed(context, HomeScreen.routeName);
               }
             },
           ),
@@ -63,9 +91,13 @@ class _PublishOfferFormState extends State<PublishOfferForm> {
     );
   }
 
+  TextEditingController currentPriceController = new TextEditingController();
+  TextEditingController offerPriceController = new TextEditingController();
+
   TextFormField buildAddressFormField() {
     return TextFormField(
-      onSaved: (newValue) => address = newValue,
+      controller: offerPriceController,
+      onSaved: (newValue) => offerPrice = newValue!,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kAddressNullError);
@@ -85,8 +117,6 @@ class _PublishOfferFormState extends State<PublishOfferForm> {
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon:
-            CustomSurffixIcon(svgIcon: "assets/icons/Location point.svg"),
       ),
     );
   }
@@ -112,31 +142,6 @@ class _PublishOfferFormState extends State<PublishOfferForm> {
         print('Country changed to: ' + country.code);
       },
     );
-    // return TextFormField(
-    //   keyboardType: TextInputType.phone,
-    //   onSaved: (newValue) => phoneNumber = newValue,
-    //   onChanged: (value) {
-    //     if (value.isNotEmpty) {
-    //       removeError(error: kPhoneNumberNullError);
-    //     }
-    //     return null;
-    //   },
-    //   validator: (value) {
-    //     if (value!.isEmpty) {
-    //       addError(error: kPhoneNumberNullError);
-    //       return "";
-    //     }
-    //     return null;
-    //   },
-    //   decoration: const InputDecoration(
-    //     labelText: "Your Mobile Number",
-    //     hintText: "Enter your phone number",
-    //     // If  you are using latest version of flutter then lable text and hint text shown like this
-    //     // if you r using flutter less then 1.20.* then maybe this is not working properly
-    //     floatingLabelBehavior: FloatingLabelBehavior.always,
-    //     suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
-    //   ),
-    // );
   }
 
   Row currentPriceOfferPriceFormField() {
@@ -144,63 +149,76 @@ class _PublishOfferFormState extends State<PublishOfferForm> {
       children: [
         Expanded(
           child: TextFormField(
-            onSaved: (newValue) => lastName = newValue,
+            onSaved: (newValue) => currentPrice = newValue!,
             decoration: const InputDecoration(
-              labelText: "Current Price",
-              hintText: "",
-              // If  you are using latest version of flutter then lable text and hint text shown like this
-              // if you r using flutter less then 1.20.* then maybe this is not working properly
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
-            ),
+                labelText: "Current Price",
+                hintText: "",
+                floatingLabelBehavior: FloatingLabelBehavior.always),
           ),
         ),
         Expanded(
           child: TextFormField(
-            onSaved: (newValue) => lastName = newValue,
+            onSaved: (newValue) => offerPrice = newValue!,
             decoration: const InputDecoration(
-              labelText: "Discount Price",
-              hintText: "",
-              // If  you are using latest version of flutter then lable text and hint text shown like this
-              // if you r using flutter less then 1.20.* then maybe this is not working properly
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
-            ),
+                labelText: "Discount Price",
+                hintText: "",
+                floatingLabelBehavior: FloatingLabelBehavior.always),
           ),
         )
       ],
     );
   }
 
+  TextEditingController startDateController = new TextEditingController();
+  TextEditingController endDateController = new TextEditingController();
+
   Row buildEmailFormField() {
     return Row(
       children: [
         Expanded(
-          child: TextFormField(
-            onSaved: (newValue) => lastName = newValue,
-            onTap: () async {
-              DateTime? pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  //get today's date
-                  firstDate: DateTime(2000),
-                  //DateTime.now() - not to allow to choose before today.
-                  lastDate: DateTime(2101));
-            },
-            decoration: const InputDecoration(
-              labelText: "Start Date",
-              hintText: "",
-              // If  you are using latest version of flutter then lable text and hint text shown like this
-              // if you r using flutter less then 1.20.* then maybe this is not working properly
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
-            ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextFormField(
+                controller: startDateController,
+                onSaved: (newValue) => startDate = newValue!,
+                onTap: () async {
+                  FocusScope.of(context).requestFocus(new FocusNode());
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      //get today's date
+                      firstDate: DateTime(2000),
+                      //DateTime.now() - not to allow to choose before today.
+
+                      lastDate: DateTime(2101));
+                  if (pickedDate != null) {
+                    setState(() {
+                      print("XXXXX");
+                      print(pickedDate.toString());
+                      startDateController.text = DateFormat("yyyy-MM-dd")
+                          .format(pickedDate)
+                          .toString();
+                    });
+                  }
+                },
+                decoration: const InputDecoration(
+                    labelText: "Start Date",
+                    hintText: "",
+                    // If  you are using latest version of flutter then lable text and hint text shown like this
+                    // if you r using flutter less then 1.20.* then maybe this is not working properly
+                    floatingLabelBehavior: FloatingLabelBehavior.always),
+              ),
+            ],
           ),
         ),
         Expanded(
           child: TextFormField(
-            onSaved: (newValue) => lastName = newValue,
+            controller: endDateController,
+            onSaved: (newValue) => endDate = newValue!,
             onTap: () async {
+              FocusScope.of(context).requestFocus(new FocusNode());
               DateTime? pickedDate = await showDatePicker(
                   context: context,
                   initialDate: DateTime.now(),
@@ -208,15 +226,21 @@ class _PublishOfferFormState extends State<PublishOfferForm> {
                   firstDate: DateTime(2000),
                   //DateTime.now() - not to allow to choose before today.
                   lastDate: DateTime(2101));
+              if (pickedDate != null) {
+                setState(() {
+                  print("XXXXX");
+                  print(pickedDate.toString());
+                  endDateController.text =
+                      DateFormat("yyyy-MM-dd").format(pickedDate).toString();
+                });
+              }
             },
             decoration: const InputDecoration(
-              labelText: "End Date",
-              hintText: "",
-              // If  you are using latest version of flutter then lable text and hint text shown like this
-              // if you r using flutter less then 1.20.* then maybe this is not working properly
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
-            ),
+                labelText: "End Date",
+                hintText: "",
+                // If  you are using latest version of flutter then lable text and hint text shown like this
+                // if you r using flutter less then 1.20.* then maybe this is not working properly
+                floatingLabelBehavior: FloatingLabelBehavior.always),
           ),
         )
       ],
@@ -225,21 +249,20 @@ class _PublishOfferFormState extends State<PublishOfferForm> {
 
   TextFormField offerDescriotionFormField() {
     return TextFormField(
-      onSaved: (newValue) => lastName = newValue,
+      onSaved: (newValue) => description = newValue!,
       decoration: const InputDecoration(
         labelText: "Description",
         hintText: "Enter your offer description",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
     );
   }
 
   TextFormField offerTitleFormField() {
     return TextFormField(
-      onSaved: (newValue) => firstName = newValue,
+      onSaved: (newValue) => title = newValue!,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kNamelNullError);
@@ -254,13 +277,9 @@ class _PublishOfferFormState extends State<PublishOfferForm> {
         return null;
       },
       decoration: const InputDecoration(
-        labelText: "Your Offer Title",
-        hintText: "Enter your Offer Title",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
-      ),
+          labelText: "Your Offer Title",
+          hintText: "Enter your Offer Title",
+          floatingLabelBehavior: FloatingLabelBehavior.always),
     );
   }
 }
