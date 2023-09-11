@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Offer Model for interacting with the offer API from backend
 class Offer {
   late int id;
   final String title;

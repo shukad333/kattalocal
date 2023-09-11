@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Analytics Model for interacting with the analytics API from backend
 class AnalyticsSummary {
   final int noOfPosts;
   final int noOfViews;

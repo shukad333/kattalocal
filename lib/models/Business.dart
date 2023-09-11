@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Business Model for interacting with the business API from backend
 class Business {
   final int id;
   final String name;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Events Model for interacting with the events API from backend
 class Events {
   late int id;
   final String title;
