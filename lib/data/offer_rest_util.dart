@@ -15,6 +15,8 @@ class OfferRestUtil extends ChangeNotifier {
     notifyListeners();
 
     String url = "http://10.0.2.2:8081/api/v1/1/offers";
+    //use the below for ios
+    // String url = "http://0.0.0.0:8081/api/v1/1/offers";
     //   String url = "http://127.0.0.1:8081/api/v1/business";
     http.Response resp = await http.post(Uri.parse(url),
         headers: <String, String>{

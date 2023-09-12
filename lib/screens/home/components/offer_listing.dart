@@ -58,8 +58,10 @@ class _OfferListing extends State<OfferListing> {
 
   Future<List<Offer>> _getOffersData(int businessId) async {
     //String url = "http://192.168.1.7:8081/api/v1/business";
-    String url =
-        "http://10.0.2.2:8081/api/v1/business/$businessId/offers";
+    String url = "http://10.0.2.2:8081/api/v1/business/$businessId/offers";
+    //use the below for ios simulator
+    // String url =
+    //     "http://0.0.0.0:8081/api/v1/business/$businessId/offers";
     //   String url = "http://127.0.0.1:8081/api/v1/business";
     http.Response resp = await http.get(Uri.parse(url));
     if (resp.statusCode == 200) {
